@@ -1,11 +1,11 @@
 // The Policy class models an insurance policy for one person, which includes a policyholder.
-   public class Policy {
+public class Policy {
     private String policyNumber; 
     private String providerName; 
     private PolicyHolder policyHolder; 
 
     // Default constructor that initializes all fields to default values.
-        public Policy() {
+    public Policy() {
         policyNumber = "";
         providerName = "";
         policyHolder = new PolicyHolder(); // Initializes the PolicyHolder object.
@@ -18,7 +18,7 @@
       @param pName The provider name.
       @param holder The policyholder associated with the policy.
     */
-    public Policy(String pNumber, String pName, PolicyHolder holder) {
+     public Policy(String pNumber, String pName, PolicyHolder holder) {
         policyNumber = pNumber;
         providerName = pName;
         policyHolder = holder;
@@ -39,7 +39,7 @@
       
       @return The calculated price of the policy.
     */
-    public double getPrice() {
+     public double getPrice() {
         final double BASE_PRICE = 600;
         final double ADDITIONAL_FEE_AGE = 75;
         final double ADDITIONAL_FEE_SMOKING = 100;
@@ -52,6 +52,16 @@
         if (policyHolder.getSmokingStatus().equalsIgnoreCase("smoker")) price += ADDITIONAL_FEE_SMOKING;
         if (policyHolder.getBMI() > BMI_THRESHOLD) price += ((policyHolder.getBMI() - BMI_THRESHOLD) * ADDITIONAL_FEE_PER_BMI);
 
-        return price;
+        return price;  // Close the getPrice method here
+    }
+
+    /**
+      Returns a string representation of the Policy object.
+      
+      @return A string with the policy number, provider name, and the policyholder's information.
+    */
+     @Override
+     public String toString() {
+         return "Policy [policyNumber=" + policyNumber + ", providerName=" + providerName + ", policyHolder=" + policyHolder.toString() + "]";
     }
 }
