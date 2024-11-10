@@ -1,5 +1,4 @@
 // The PolicyHolder class represents a person associated with an insurance policy.
-
 public class PolicyHolder {
     private String firstName; 
     private String lastName;  
@@ -28,13 +27,13 @@ public class PolicyHolder {
       @param h The policyholder's height in inches.
       @param w The policyholder's weight in pounds.
     */
-    public PolicyHolder(String fName, String lName, int a, String sStatus, double h, double w) {
-        firstName = fName;
-        lastName = lName;
-        age = a;
-        smokingStatus = sStatus;
-        height = h;
-        weight = w;
+     public PolicyHolder(String fName, String lName, int a, String sStatus, double h, double w) {
+         firstName = fName;
+         lastName = lName;
+         age = a;
+         smokingStatus = sStatus;
+         height = h;
+         weight = w;
     }
 
     // Setters with @param tags
@@ -58,8 +57,19 @@ public class PolicyHolder {
       
       @return The calculated BMI based on the policyholder's height and weight.
     */
-    public double getBMI() {
-        final double CONVFACTOR = 703; // Conversion factor for BMI calculation.
-        return (weight * CONVFACTOR) / (height * height);
-    }
+     public double getBMI() {
+         final double CONVFACTOR = 703; // Conversion factor for BMI calculation.
+         return (weight * CONVFACTOR) / (height * height);
+     }
+
+    /**
+      Returns a string representation of the PolicyHolder object.
+  
+      @return A string with the policyholder's first name, last name, age, smoking status, height, and weight.
+    */
+     @Override
+     public String toString() {
+         return "PolicyHolder [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + 
+                ", smokingStatus=" + smokingStatus + ", height=" + height + " inches, weight=" + weight + " lbs]";
+     }
 }
