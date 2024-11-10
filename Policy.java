@@ -1,28 +1,14 @@
+// The Policy class models an insurance policy for one person, which includes a policyholder.
+   public class Policy {
+    private String policyNumber; 
+    private String providerName; 
+    private PolicyHolder policyHolder; 
 
-// The Policy class models an insurance policy for one person.
- 
-public class Policy {
-    private String policyNumber;
-    private String providerName;
-    private String firstName;
-    private String lastName;
-    private int age;
-    private String smokingStatus;
-    private double height;
-    private double weight;
-
-    
-// Default constructor that initializes all fields to default values.
-     
-    public Policy() {
+    // Default constructor that initializes all fields to default values.
+        public Policy() {
         policyNumber = "";
         providerName = "";
-        firstName = "";
-        lastName = "";
-        age = 0;
-        smokingStatus = "";
-        height = 0;
-        weight = 0;
+        policyHolder = new PolicyHolder(); // Initializes the PolicyHolder object.
     }
 
     /**
@@ -30,59 +16,29 @@ public class Policy {
       
       @param pNumber The policy number.
       @param pName The provider name.
-      @param fName The policyholder's first name.
-      @param lName The policyholder's last name.
-      @param a The policyholder's age.
-      @param sStatus The policyholder's smoking status (smoker/non-smoker).
-      @param h The policyholder's height in inches.
-      @param w The policyholder's weight in pounds.
-     */
-    public Policy(String pNumber, String pName, String fName, String lName, int a, String sStatus, double h, double w) {
+      @param holder The policyholder associated with the policy.
+    */
+    public Policy(String pNumber, String pName, PolicyHolder holder) {
         policyNumber = pNumber;
         providerName = pName;
-        firstName = fName;
-        lastName = lName;
-        age = a;
-        smokingStatus = sStatus;
-        height = h;
-        weight = w;
+        policyHolder = holder;
     }
 
-    // Setters with @param tag
+    // Setters with @param tags
     public void setPolicyNumber(String pNumber) { policyNumber = pNumber; }
     public void setProviderName(String pName) { providerName = pName; }
-    public void setFirstName(String fName) { firstName = fName; }
-    public void setLastName(String lName) { lastName = lName; }
-    public void setAge(int a) { age = a; }
-    public void setSmokingStatus(String sStatus) { smokingStatus = sStatus; }
-    public void setHeight(double h) { height = h; }
-    public void setWeight(double w) { weight = w; }
+    public void setPolicyHolder(PolicyHolder holder) { policyHolder = holder; }
 
-    // Getters with @return tag
+    // Getters with @return tags
     public String getPolicyNumber() { return policyNumber; }
     public String getProviderName() { return providerName; }
-    public String getFirstName() { return firstName; }
-    public String getLastName() { return lastName; }
-    public int getAge() { return age; }
-    public String getSmokingStatus() { return smokingStatus; }
-    public double getHeight() { return height; }
-    public double getWeight() { return weight; }
+    public PolicyHolder getPolicyHolder() { return policyHolder; }
 
     /**
-     Calculates and returns the policyholder's BMI.
-      
-      @return The calculated BMI based on the policyholder's height and weight.
-     */
-    public double getBMI() {
-        final double CONVFACTOR = 703;
-        return (weight * CONVFACTOR) / (height * height);
-    }
-
-    /**
-      Calculates and returns the price of the policy.
+      Calculates and returns the price of the policy based on the policyholder's information.
       
       @return The calculated price of the policy.
-     */
+    */
     public double getPrice() {
         final double BASE_PRICE = 600;
         final double ADDITIONAL_FEE_AGE = 75;
@@ -92,9 +48,9 @@ public class Policy {
         final int BMI_THRESHOLD = 35;
 
         double price = BASE_PRICE;
-        if (age > AGE_THRESHOLD) price += ADDITIONAL_FEE_AGE;
-        if (smokingStatus.equalsIgnoreCase("smoker")) price += ADDITIONAL_FEE_SMOKING;
-        if (getBMI() > BMI_THRESHOLD) price += ((getBMI() - BMI_THRESHOLD) * ADDITIONAL_FEE_PER_BMI);
+        if (policyHolder.getAge() > AGE_THRESHOLD) price += ADDITIONAL_FEE_AGE;
+        if (policyHolder.getSmokingStatus().equalsIgnoreCase("smoker")) price += ADDITIONAL_FEE_SMOKING;
+        if (policyHolder.getBMI() > BMI_THRESHOLD) price += ((policyHolder.getBMI() - BMI_THRESHOLD) * ADDITIONAL_FEE_PER_BMI);
 
         return price;
     }
