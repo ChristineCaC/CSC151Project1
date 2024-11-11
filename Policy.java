@@ -74,8 +74,10 @@ public class Policy {
       
       @return A string with the policy number, provider name, and the policyholder's information.
     */
-     @Override
-     public String toString() {
-         return "Policy [policyNumber=" + policyNumber + ", providerName=" + providerName + ", policyHolder=" + policyHolder.toString() + "]";
-     }
+    @Override
+    public String toString() {
+        return "Policy Number: " + policyNumber + "\n" +
+               "Provider Name: " + providerName + "\n" +
+               "Policyholder: " + policyHolder.toString();
+    }
 }
