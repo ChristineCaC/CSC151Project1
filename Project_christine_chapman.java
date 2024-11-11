@@ -1,4 +1,4 @@
-import java.util.*; 
+import java.util.*;
 import java.io.*;
 
 public class Project_christine_chapman {
@@ -33,8 +33,11 @@ public class Project_christine_chapman {
                     inputFile.nextLine();
                 }
 
+                // Creating a PolicyHolder object with the read data
+                PolicyHolder policyHolder = new PolicyHolder(firstName, lastName, age, smokingStatus, height, weight);
+                
                 // Creating and adding the Policy object to the list
-                Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
+                Policy policy = new Policy(policyNumber, providerName, policyHolder);
                 policies.add(policy);
             }
             inputFile.close();
@@ -42,31 +45,33 @@ public class Project_christine_chapman {
             // Counters for smokers and non-smokers
             int smokerCount = 0, nonSmokerCount = 0;
 
-            // Displaying the details of each policy
+            // Displaying the details of each policy in the required format
             for (Policy p : policies) {
                 System.out.println("Policy Number: " + p.getPolicyNumber());
                 System.out.println("Provider Name: " + p.getProviderName());
-                System.out.println("Policyholder's First Name: " + p.getFirstName());
-                System.out.println("Policyholder's Last Name: " + p.getLastName());
-                System.out.println("Policyholder's Age: " + p.getAge());
-                System.out.println("Policyholder's Smoking Status (smoker/non-smoker): " + p.getSmokingStatus());
-                System.out.printf("Policyholder's Height: %.1f inches\n", p.getHeight());
-                System.out.printf("Policyholder's Weight: %.1f pounds\n", p.getWeight());
-                System.out.printf("Policyholder's BMI: %.2f\n", p.getBMI());
+                System.out.println("Policyholder's First Name: " + p.getPolicyHolder().getFirstName());
+                System.out.println("Policyholder's Last Name: " + p.getPolicyHolder().getLastName());
+                System.out.println("Policyholder's Age: " + p.getPolicyHolder().getAge());
+                System.out.println("Policyholder's Smoking Status (Y/N): " + p.getPolicyHolder().getSmokingStatus());
+                System.out.printf("Policyholder's Height: %.1f inches\n", p.getPolicyHolder().getHeight());
+                System.out.printf("Policyholder's Weight: %.1f pounds\n", p.getPolicyHolder().getWeight());
+                System.out.printf("Policyholder's BMI: %.2f\n", p.getPolicyHolder().getBMI());
                 System.out.printf("Policy Price: $%.2f\n", p.getPrice());
                 System.out.println();
-
+                
                 // Counting smokers and non-smokers
-                if (p.getSmokingStatus().equalsIgnoreCase("smoker")) {
+                if (p.getPolicyHolder().getSmokingStatus().equalsIgnoreCase("smoker")) {
                     smokerCount++;
                 } else {
                     nonSmokerCount++;
                 }
             }
 
-            // Display the counts
-            System.out.println("The number of policies with a smoker is: 4");
-            System.out.println("The number of policies with a non-smoker is: 2");
+            // Displaying the total count of policies created
+            System.out.println("There were " + policies.size() + " Policy objects created.");
+            // Display the counts of smokers and non-smokers
+            System.out.println("The number of policies with a smoker is: " + smokerCount);
+            System.out.println("The number of policies with a non-smoker is: " + nonSmokerCount);
 
         } catch (IOException ex) {
             // Handling any errors related to file input
